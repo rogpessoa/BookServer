@@ -5,9 +5,15 @@ async function getTodosLivros() {
     return listaLivros;
 }
 
+
 async function getLivroPorId(id) {
     const listaLivros = await livros.findById(id);
     return listaLivros;
+}
+
+
+async function listarLivrosPorEditora(editora) {
+    return await livros.find({ editora: editora });
 }
 
 async function insereLivro(livroNovo) {
@@ -26,6 +32,7 @@ async function removeLivro(id) {
 export {
     getTodosLivros,
     getLivroPorId,
+    listarLivrosPorEditora,
     insereLivro,
     modificaLivro,
     removeLivro

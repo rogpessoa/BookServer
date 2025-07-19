@@ -2,6 +2,7 @@ import express from "express"
 //import {rotaLivro, rotaFavorito} from "./rotas/livro.js"
 import rotaLivro from "./rotas/livro.js"
 import rotaFavorito from "./rotas/favorito.js"
+import autores from "./rotas/autores.js"
 import pool from "./config/dbConnect.js"
 import cors from "cors"
 import "dotenv/config"
@@ -12,6 +13,7 @@ const port = 8000
 app.use(express.json())
 app.use("/livros", rotaLivro)
 app.use("/favoritos", rotaFavorito)
+app.use("/autores", autores)
 app.use(cors({origin: "*"}))
 
 conexao.on("error", (erro) =>{
