@@ -1,29 +1,25 @@
-import fs from "fs"
+import favoritos from "../models/favoritos.js"
 
-function getTodosLivrosFavoritos(){
-    return JSON.parse(fs.readFileSync("favoritos.json"))
+async function getTodosLivrosFavoritos(){
+    const listaLivrosFavoritos = await favoritos.find({});
+    return listaLivrosFavoritos;
 }
 
 
-function getLivroPorIdFavoritos(id){
-    const livros = JSON.parse(fs.readFileSync("favoritos.json"))
-    const livroFiltrado = livros.filter(livro => livro.id ===id )[0]
-return livroFiltrado
+async function getLivroPorIdFavoritos(id){
+    const listaLivrosFavoritos = await favoritos.findById(id);
+    return listaLivrosFavoritos;
+  
 }
 
-function insereLivroFavorito(livroNovo){
-    const livros = JSON.parse(fs.readFileSync("favoritos.json"))
-    const novaListaDeLivrosFavoritos = [...livros, livroNovo]
-
-    fs.writeFileSync("favoritos.json", JSON.stringify(novaListaDeLivrosFavoritos))
+async function insereLivroFavorito(livroNovo){
+    await favoritos.create(livroNovo);
 }
 
-function deleteLivroFavorito(id) {
+async function deleteLivroFavorito(id) {
+    await favoritos.findByIdAndDelete(id);
 
-    const livrosAtuais = JSON.parse(fs.readFileSync("favoritos.json"));
-    const livrosAtualizados = livrosAtuais.filter(livro => livro.id !== id);
-    fs.writeFileSync("favoritos.json", JSON.stringify(livrosAtualizados));
-    
+ 
 }
 
 

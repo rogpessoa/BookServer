@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const livroSchema = new mongoose.Schema({
+const favoritosSchema = new mongoose.Schema({
     id: {type: mongoose.Schema.Types.ObjectId},
     nome: {type: String, required: true},
     editora: {type: String},
@@ -8,10 +8,6 @@ const livroSchema = new mongoose.Schema({
     paginas: {type: Number}
 }, {versionKey: false}) 
 
-const livro = mongoose.model("livros", livroSchema)
+const favoritos = mongoose.model("favoritos", favoritosSchema)
 
-
-export default livro
-    
-
-
+export default favoritos

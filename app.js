@@ -1,10 +1,10 @@
 import express from "express"
 //import {rotaLivro, rotaFavorito} from "./rotas/livro.js"
 import rotaLivro from "./rotas/livro.js"
-import rotaFavorito from "./rotas/livro.js"
+import rotaFavorito from "./rotas/favorito.js"
 import pool from "./config/dbConnect.js"
 import cors from "cors"
-
+import "dotenv/config"
 
 const conexao = await pool()
 const app = express()

@@ -1,10 +1,10 @@
 import {getTodosLivrosFavoritos, getLivroPorIdFavoritos, insereLivroFavorito, deleteLivroFavorito} from "../servicos/favorito.js"
 
 
-function getLivrosFavoritos(req, res) { //req = requisiçao res = response
+async function getLivrosFavoritos(req, res) { //req = requisiçao res = response
     try{
-        const livros = getTodosLivrosFavoritos()
-        res.send(livros)      
+        const livrosFavoritos = await getTodosLivrosFavoritos()
+        res.send(livrosFavoritos)      
     } catch(error){
         res.status(500)
         res.send(error.message)
@@ -12,13 +12,13 @@ function getLivrosFavoritos(req, res) { //req = requisiçao res = response
     
 }
 
-function getLivroFavorito(req, res) { //req = requisiçao res = response
+async function getLivroFavorito(req, res) { //req = requisiçao res = response
     try{
 
         const id = req.params.id
-        if (id && Number(id)){
-            const livros = getLivroPorIdFavoritos(id)
-            res.send(livros)
+        if (id){
+            const livrosFavoritosId = await getLivroPorIdFavoritos(id)
+            res.send(livrosFavoritosId)
         } else{
             res.status(422)
             res.send("ID invalido!")
@@ -31,12 +31,13 @@ function getLivroFavorito(req, res) { //req = requisiçao res = response
     
 }
 
-function postLivroFavorito(req, res){
+
+async function postLivroFavorito(req, res){
     try{
         const livroNovo = req.body
         
         if (req.body.nome){
-            insereLivroFavorito(livroNovo)
+            await insereLivroFavorito(livroNovo)
             res.status(201)
             res.send("Livro favorito inserido com sucesso")
         }else{
@@ -50,11 +51,11 @@ function postLivroFavorito(req, res){
 }
 
 
-function delLivroFavorito(req, res){
+async function delLivroFavorito(req, res){
     try{
         const id = req.params.id      
-        if (id && Number(id)){
-            deleteLivroFavorito(id)
+        if (id){
+            await deleteLivroFavorito(id)
             res.send("Livro favorito deletado com sucesso")
         }else{
             res.status(422)
