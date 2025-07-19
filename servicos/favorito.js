@@ -1,4 +1,4 @@
-const fs = require("fs")
+import fs from "fs"
 
 function getTodosLivrosFavoritos(){
     return JSON.parse(fs.readFileSync("favoritos.json"))
@@ -27,9 +27,9 @@ function deleteLivroFavorito(id) {
 }
 
 
-module.exports = {
-    getTodosLivrosFavoritos,
+export {
     getLivroPorIdFavoritos,
+    getTodosLivrosFavoritos,
     insereLivroFavorito,
     deleteLivroFavorito
 }

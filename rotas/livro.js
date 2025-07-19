@@ -1,5 +1,5 @@
-const { getLivros, getLivro, postLivro, patchLivro, delLivro} = require("../controladores/livro")
-const { Router } = require("express")
+import { getLivro, getLivros, postLivro, patchLivro, deleteLivro } from "../controladores/livro.js"
+import { Router } from "express"
 const router = Router()
 
 router.get("/", getLivros)
@@ -10,7 +10,7 @@ router.post("/", postLivro)
 
 router.patch("/:id", patchLivro) //importa do controlador
 
-router.delete("/:id", delLivro)
+router.delete("/:id", deleteLivro)
 
 
-module.exports = router
+export default router

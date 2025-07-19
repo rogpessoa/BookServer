@@ -1,4 +1,4 @@
-const { getTodosLivrosFavoritos, getLivroPorIdFavoritos, insereLivroFavorito, deleteLivroFavorito } = require("../servicos/favorito")
+import {getTodosLivrosFavoritos, getLivroPorIdFavoritos, insereLivroFavorito, deleteLivroFavorito} from "../servicos/favorito.js"
 
 
 function getLivrosFavoritos(req, res) { //req = requisiçao res = response
@@ -68,11 +68,10 @@ function delLivroFavorito(req, res){
     }
 }
 
-module.exports = {
+
+export{
     getLivrosFavoritos,
     getLivroFavorito,
     postLivroFavorito,
     delLivroFavorito
-
 }
-

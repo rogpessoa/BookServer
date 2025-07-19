@@ -1,95 +1,77 @@
-const { getTodosLivros, getLivroPorId, insereLivro, modificaLivro, deleteLivro} = require("../servicos/livro")
+import { getTodosLivros, getLivroPorId, insereLivro, modificaLivro, removeLivro } from "../servicos/livros.js";
 
-function getLivros(req, res) { //req = requisiçao res = response
+async function getLivros(req, res) {
     try{
-        const livros = getTodosLivros()
-        res.send(livros)      
-    } catch(error){
-        res.status(500)
+        const livros = await getTodosLivros();
+        res.send(livros);
+    } catch(error) {
+        res.status(500);
         res.send(error.message)
     }
-    
 }
 
-function getLivro(req, res) { //req = requisiçao res = response
-    try{
 
+async function getLivro(req, res) {
+    try{
         const id = req.params.id
-        if (id && Number(id)){
-            const livros = getLivroPorId(id)
-            res.send(livros)
-        } else{
-            res.status(422)
-            res.send("ID invalido!")
+        if(id) {
+            const livro = await getLivroPorId(id);
+            res.send(livro);
         }
-             
-    } catch(error){
-        res.status(500)
-        res.send(error.message)
+    } catch(error) {
+        res.status(422);
+        res.send("Id inválido")
     }
-    
 }
 
-function postLivro(req, res){
-    try{
+async function postLivro(req, res) {
+    try {
         const livroNovo = req.body
-        
-        if (req.body.nome){
-            insereLivro(livroNovo)
+        if (req.body.nome) {
+            await insereLivro(livroNovo)
             res.status(201)
-            res.send("Livro inserido com sucesso")
-        }else{
-            res.status(422)
-            res.send("O campo é obrigatório")
-}
-    }catch(error){
-        res.send(500)
-        res.send(error.message)
-    }
-}
-
-
-function patchLivro(req, res){
-    try{
-        const id = req.params.id
-        if (id && Number(id)){
-            const body = req.body
-            modificaLivro(body, id) //importa a função de serviço
-            res.send("Item modificado com sucesso")
-        } else{
-            res.send(422)
-            res.send("ID invalido")
-        }      
-    }catch(error){
-        res.status(500)
-        res.send(error.message)
-    }
-}
-
-function delLivro(req, res){
-    try{
-        const id = req.params.id      
-        if (id && Number(id)){
-            deleteLivro(id)
-            res.send("Livro deletado com sucesso")
-        }else{
-            res.status(422)
-            res.send("ID invalido")
+            res.send("Livro inserido com sucesso!")
         }
-        
-
-    }catch(error){
-        res.status(500)
-        res.send(error.message)
+    } catch(error) {
+        res.status(500);
+        res.send("O campo nome é obrigatório!")
     }
 }
 
-module.exports = {
+async function patchLivro(req, res) {
+    try {
+        const id = req.params.id
+
+        if(id) {
+            const body = req.body
+            await modificaLivro(body, id)
+            res.status(201)
+            res.send("Livro editado com sucesso!")
+        }
+    } catch(error) {
+        res.status(500)
+        res.send("Id inválido")
+    }
+}
+
+async function deleteLivro(req, res) {
+    try {
+        const id = req.params.id;
+        if(id) {
+            await removeLivro(id);
+            res.status(200);
+            res.send("Livro removido com sucesso!");
+        }
+    } catch(error) {
+        res.status(500);
+        res.send("Id inválido");
+    }
+}
+
+export {
     getLivros,
     getLivro,
     postLivro,
     patchLivro,
-    delLivro
-
+    deleteLivro
 }
-

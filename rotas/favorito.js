@@ -1,5 +1,5 @@
-const { getLivrosFavoritos, getLivroFavorito, postLivroFavorito, delLivroFavorito } = require("../controladores/favorito")
-const { Router } = require("express")
+import { getLivrosFavoritos, getLivroFavorito, postLivroFavorito, delLivroFavorito } from "../controladores/favorito.js"
+import { Router } from "express"
 const router = Router()
 
 router.get("/", getLivrosFavoritos)
@@ -11,4 +11,4 @@ router.post("/", postLivroFavorito)
 router.delete("/:id", delLivroFavorito)
 
 
-module.exports = router
+export default router
