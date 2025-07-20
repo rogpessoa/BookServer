@@ -1,10 +1,12 @@
-import { getLivro, getLivros, postLivro, patchLivro, deleteLivro, getLivroPorEditora } from "../controladores/livro.js"
+import { getLivro, getLivros, postLivro, patchLivro, deleteLivro, getLivrosPorEditora } from "../controladores/livro.js"
 import { Router } from "express"
+
 const router = Router()
 
 router.get("/", getLivros)
 
-router.get("/busca", getLivroPorEditora)
+router.get("/busca", getLivrosPorEditora)
+
 router.get("/:id", getLivro) //consulta livros por id
 
 

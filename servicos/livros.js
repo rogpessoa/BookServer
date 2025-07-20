@@ -1,4 +1,6 @@
 import livros from "../models/Livros.js";
+import { autor } from "../models/Autores.js";
+
 
 async function getTodosLivros() {
     const listaLivros = await livros.find({});

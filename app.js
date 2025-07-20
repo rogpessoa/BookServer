@@ -1,5 +1,4 @@
 import express from "express"
-//import {rotaLivro, rotaFavorito} from "./rotas/livro.js"
 import rotaLivro from "./rotas/livro.js"
 import rotaFavorito from "./rotas/favorito.js"
 import autores from "./rotas/autores.js"
@@ -10,6 +9,7 @@ import "dotenv/config"
 const conexao = await pool()
 const app = express()
 const port = 8000
+
 app.use(express.json())
 app.use("/livros", rotaLivro)
 app.use("/favoritos", rotaFavorito)

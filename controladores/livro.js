@@ -12,18 +12,6 @@ async function getLivros(req, res) {
 }
 
 
-async function  getLivroPorEditora(req, res) {
-    const editora = req.query.editora
-    try {
-        const livrosPorEditora = await listarLivrosPorEditora(editora);
-        res.send(livrosPorEditora);
-    } catch (error) {
-        res.status(500);
-        res.send(error.message)
-    }
-}
-
-
 async function getLivro(req, res) {
     try{
         const id = req.params.id
@@ -36,6 +24,22 @@ async function getLivro(req, res) {
         res.send("Id inválido")
     }
 }
+
+
+async function getLivrosPorEditora(req, res) {
+    const editora = req.query.editora
+    try{
+        const livrosPorEditora = await listarLivrosPorEditora(editora)
+        res.send(livrosPorEditora)
+
+    }catch(error){
+        res.status(500)
+        res.send(error.message)
+    }
+    
+}
+
+
 
 async function postLivro(req, res) {
     const livroNovo = req.body
@@ -90,7 +94,7 @@ async function deleteLivro(req, res) {
 export {
     getLivros,
     getLivro,
-    getLivroPorEditora,
+    getLivrosPorEditora,
     postLivro,
     patchLivro,
     deleteLivro
