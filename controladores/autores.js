@@ -34,12 +34,12 @@ async function getAutorFavorito(req, res) { //req = requisiçao res = response
 
 async function postAutorFavorito(req, res){
     try{
-        const livroNovo = req.body
+        const AutorNovo = req.body
         
         if (req.body.nome){
-            await insereAutorFavorito(livroNovo)
+            await insereAutorFavorito(AutorNovo)
             res.status(201)
-            res.send("Livro favorito inserido com sucesso")
+            res.send("Autor inserido com sucesso")
         }else{
             res.status(422)
             res.send("O campo é obrigatório")
@@ -56,7 +56,7 @@ async function delAutorFavorito(req, res){
         const id = req.params.id      
         if (id){
             await deleteAutorFavorito(id)
-            res.send("Livro favorito deletado com sucesso")
+            res.send("Autor deletado com sucesso")
         }else{
             res.status(422)
             res.send("ID invalido")
